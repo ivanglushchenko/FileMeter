@@ -25,7 +25,7 @@ namespace FileMeter
         {
             InitializeComponent();
 
-            
+            DataContext = new MainWindowModel();
         }
     }
 }

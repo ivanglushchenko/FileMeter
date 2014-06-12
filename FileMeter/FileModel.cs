@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 
 namespace FileMeter
 {
-    public partial class FileModel : ObservableObject
+    public partial class FileModel : FileSystemObject
     {
         public FileModel(DirectoryModel directory, FileInfo fileInfo)
         {
             Directory = directory;
             Name = fileInfo.Name;
             Size = fileInfo.Length;
-            Directory.AddSize(Size);
         }
 
         public DirectoryModel Directory { get; private set; }
-        public string Name { get; private set; }
-        public long Size { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Format("File: {0}", Name);
+        }
     }
 }

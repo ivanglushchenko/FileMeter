@@ -13,5 +13,17 @@ namespace FileMeter
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                RootDirectory = dialog.SelectedPath;
+                //RootDirectory = @"C:\Users\Ivan\.IdeaIC13\system\compile-server\playground_3477729d\timestamps";
+                base.OnStartup(e);
+            }
+        }
+
+        public static string RootDirectory { get; set; }
     }
 }
