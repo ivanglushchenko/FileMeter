@@ -19,9 +19,13 @@ namespace FileMeter
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 RootDirectory = dialog.SelectedPath;
-                //RootDirectory = @"C:\Users\Ivan\.IdeaIC13\system\compile-server\playground_3477729d\timestamps";
+                MainWindow = new MainWindow();
+                MainWindow.Show();
+                MainWindow.Activate();
                 base.OnStartup(e);
             }
+            else
+                App.Current.Shutdown();
         }
 
         public static string RootDirectory { get; set; }

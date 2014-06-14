@@ -12,7 +12,7 @@ namespace FileMeter
         public MainWindowModel()
         {
             Root = new DirectoryModel(null, new DirectoryInfo(App.RootDirectory));
-            Root.Traverse();
+            Root.Traverse(true);
         }
 
         /// <summary>

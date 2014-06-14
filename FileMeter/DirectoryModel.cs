@@ -78,7 +78,7 @@ namespace FileMeter
                     else
                         break;
                 }
-                if (newIndex < oldIndex)
+                if (newIndex < oldIndex && App.Current != null)
                     App.Current.Dispatcher.Invoke((Action)(() => Items.Move(oldIndex, newIndex)));
             }
         }
@@ -88,7 +88,7 @@ namespace FileMeter
             return string.Format("Dir: {0}", Name);
         }
 
-        public void Traverse()
+        public void Traverse(bool thread = false)
         {
             try
             {
@@ -103,7 +103,10 @@ namespace FileMeter
 
                 foreach (var item in directories)
                 {
-                    Task.Factory.StartNew(item.Traverse);
+                    if (thread)
+                        Task.Factory.StartNew(() => item.Traverse());
+                    else
+                        item.Traverse();
                 }
             }
             catch (UnauthorizedAccessException)
